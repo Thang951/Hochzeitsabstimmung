@@ -40,11 +40,11 @@
     counts={bride:bride.count||0,groom:groom.count||0,total:(bride.count||0)+(groom.count||0)};el.live.textContent='Live – neue Stimmen erscheinen automatisch';el.live.classList.remove('error');draw();
   }
   el.reset.addEventListener('click',async()=>{
-    if(busy)return;const pin=prompt('Moderator-PIN für die nächste Abstimmung:');if(pin===null)return;if(!pin.trim()){el.message.textContent='Bitte einen PIN eingeben.';return}
-    if(!confirm('Aktuelle Runde beenden und alle Handys freigeben?'))return;
+    if(busy)return;
+    if(!confirm('Aktuelle Runde beenden und alle Handys für die nächste Abstimmung freigeben?'))return;
     busy=true;el.reset.disabled=true;el.message.textContent='Neue Abstimmung wird gestartet …';
-    const {data,error}=await db.rpc('start_new_round',{p_pin:pin});busy=false;el.reset.disabled=false;
-    if(error||!data){el.message.textContent='Falscher PIN oder die neue Runde konnte nicht gestartet werden.';return}
+    const {data,error}=await db.rpc('start_new_round');busy=false;el.reset.disabled=false;
+    if(error||!data){el.message.textContent='Die neue Runde konnte nicht gestartet werden.';return}
     roundId=data;counts={bride:0,groom:0,total:0};revealed=false;el.message.textContent='Neue Abstimmung ist geöffnet – alle Handys werden automatisch freigeschaltet.';draw();
   });
   await load();setInterval(load,2000);
