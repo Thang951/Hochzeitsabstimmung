@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Live-Ergebnis</title>
+  <style>
+    :root{--ink:#3d3130;--rose:#b9636d;--sage:#647b63}*{box-sizing:border-box}body{margin:0;background:#f1e9dc;color:var(--ink);font-family:Arial,sans-serif}main{min-height:100vh;display:grid;place-items:center;padding:clamp(24px,5vw,70px);background:radial-gradient(circle at 10% 10%,#b9636d29,transparent 35%),radial-gradient(circle at 90% 90%,#647b632e,transparent 38%)}
+    .card{width:min(1400px,94vw);min-height:min(780px,88vh);display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,7vw,100px);border:1px solid #624b4426;border-radius:42px;background:#fffaf2f7;box-shadow:0 30px 90px #3d313029;text-align:center}.eyebrow{margin:0 0 16px;color:var(--sage);font-size:.75rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}h1{margin:0;font:400 clamp(4rem,9vw,9rem)/.9 Georgia,serif;letter-spacing:-.055em}h1 em{color:var(--rose);font-weight:400}.total{display:flex;justify-content:center;align-items:baseline;gap:16px;margin:28px 0 42px;color:#887873}.total strong{color:var(--ink);font:clamp(2rem,4vw,4rem) Georgia,serif}.total span{font-size:clamp(.9rem,1.5vw,1.4rem)}
+    .curtain{min-height:clamp(150px,20vw,230px);display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px dashed #647b6359;border-radius:30px;background:linear-gradient(135deg,#b9636d0f,#647b6314)}.curtain>span{color:var(--rose);font-size:clamp(1.7rem,3vw,3rem)}.curtain p{margin:10px 0 22px;color:#7d706b;font:italic clamp(1.1rem,2vw,1.8rem) Georgia,serif}.primary,.secondary{padding:16px 32px;border:0;border-radius:999px;cursor:pointer;font-weight:700;letter-spacing:.04em}.primary{background:linear-gradient(135deg,#c4717b,#a94e5b);box-shadow:0 12px 28px #a94e5b40;color:#fff;font-size:clamp(.9rem,1.4vw,1.2rem)}.secondary{align-self:center;margin-top:22px;border:1px solid #3d313038;background:transparent;color:var(--ink)}button:hover:not(:disabled){transform:translateY(-2px)}button:disabled{cursor:wait;opacity:.55}
+    .labels{display:grid;grid-template-columns:1fr 1fr;margin-bottom:15px}.labels>div{display:grid;grid-template-columns:1fr auto;align-items:end;text-align:left;padding-right:20px}.labels>div:last-child{text-align:right;padding:0 0 0 20px}.labels span{font:clamp(1.5rem,3vw,3.2rem) Georgia,serif}.labels strong{color:var(--rose);font:clamp(2rem,5vw,5rem) Georgia,serif}.labels>div:last-child strong{color:var(--sage)}.labels small{grid-column:1/-1;color:#8e7f79;font-size:clamp(.75rem,1.2vw,1.1rem)}.bar{display:flex;height:clamp(42px,6vw,82px);overflow:hidden;border-radius:999px;background:#e8ded4;box-shadow:inset 0 3px 8px #3d313024}.bar div{height:100%;transition:width .8s}.bar-bride{background:var(--rose)}.bar-groom{background:var(--sage)}.result{animation:reveal .8s both}.live{margin:28px 0 0;color:#7b8b76;font-size:clamp(.75rem,1.2vw,1rem)}.live::before{content:'';display:inline-block;width:9px;height:9px;margin-right:8px;border-radius:50%;background:#6c9966;box-shadow:0 0 0 5px #6c99661f}.message{margin:12px 0 0;color:var(--sage);font:clamp(.78rem,1.1vw,.95rem) Georgia,serif}.error{color:#a33e4a}@keyframes reveal{from{opacity:0;transform:scale(.96) translateY(18px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body><main><section class="card">
+  <p class="eyebrow">Live · Hochzeitsabstimmung</p><h1 id="title">Abstimmung <em>läuft</em></h1>
+  <div class="total"><strong id="total">0</strong><span id="total-label">abgegebene Stimmen</span></div>
+  <div id="stage" class="curtain"><span>✦</span><p>Das Ergebnis ist noch geheim</p><button id="reveal" class="primary">Ergebnis enthüllen</button></div>
+  <p id="live" class="live">Live – neue Stimmen erscheinen automatisch</p>
+  <button id="reset" class="secondary" hidden>↻ Nächste Abstimmung</button><p id="message" class="message" aria-live="polite"></p>
+</section></main>
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  const db=createClient('https://rnfyfyuowipepphyixax.supabase.co','sb_publishable_I5SDfndlpWO3mNyh3o-4Rw_s2jLL55b');
+  const el={title:document.querySelector('#title'),total:document.querySelector('#total'),label:document.querySelector('#total-label'),stage:document.querySelector('#stage'),reveal:document.querySelector('#reveal'),reset:document.querySelector('#reset'),live:document.querySelector('#live'),message:document.querySelector('#message')};
+  let roundId=null,counts={bride:0,groom:0,total:0},revealed=false,busy=false;
+  const percentage=()=>{if(!counts.total)return{bride:50,groom:50};const bride=Math.round(counts.bride/counts.total*100);return{bride,groom:100-bride}};
+  function draw(){
+    el.total.textContent=counts.total;el.label.textContent=counts.total===1?'abgegebene Stimme':'abgegebene Stimmen';
+    if(!revealed){el.title.innerHTML='Abstimmung <em>läuft</em>';el.stage.className='curtain';el.stage.innerHTML='<span>✦</span><p>Das Ergebnis ist noch geheim</p><button id="reveal" class="primary">Ergebnis enthüllen</button>';el.stage.querySelector('#reveal').addEventListener('click',()=>{revealed=true;el.message.textContent='';draw()});el.reset.hidden=true;return}
+    const pct=percentage();el.title.innerHTML='Das <em>Ergebnis</em>';el.stage.className='result';el.stage.innerHTML=`<div class="labels"><div><span>Braut</span><strong>${pct.bride} %</strong><small>${counts.bride} Stimmen</small></div><div><span>Bräutigam</span><strong>${pct.groom} %</strong><small>${counts.groom} Stimmen</small></div></div><div class="bar" role="img" aria-label="Braut ${pct.bride} Prozent, Bräutigam ${pct.groom} Prozent"><div class="bar-bride" style="width:${pct.bride}%"></div><div class="bar-groom" style="width:${pct.groom}%"></div></div>`;el.reset.hidden=false;
+  }
+  async function load(){
+    const {data:state,error:stateError}=await db.from('game_state').select('round_id').eq('id',1).single();
+    if(stateError||!state){el.live.textContent='Keine Verbindung zur Abstimmung';el.live.classList.add('error');return}
+    if(roundId&&state.round_id!==roundId){revealed=false;el.message.textContent='Neue Abstimmung ist geöffnet.'}
+    roundId=state.round_id;
+    const [bride,groom]=await Promise.all([
+      db.from('votes').select('*',{count:'exact',head:true}).eq('round_id',roundId).eq('choice','bride'),
+      db.from('votes').select('*',{count:'exact',head:true}).eq('round_id',roundId).eq('choice','groom')
+    ]);
+    if(bride.error||groom.error){el.live.textContent='Stimmen konnten nicht geladen werden';el.live.classList.add('error');return}
+    counts={bride:bride.count||0,groom:groom.count||0,total:(bride.count||0)+(groom.count||0)};el.live.textContent='Live – neue Stimmen erscheinen automatisch';el.live.classList.remove('error');draw();
+  }
+  el.reset.addEventListener('click',async()=>{
+    if(busy)return;const pin=prompt('Moderator-PIN für die nächste Abstimmung:');if(pin===null)return;if(!pin.trim()){el.message.textContent='Bitte einen PIN eingeben.';return}
+    if(!confirm('Aktuelle Runde beenden und alle Handys freigeben?'))return;
+    busy=true;el.reset.disabled=true;el.message.textContent='Neue Abstimmung wird gestartet …';
+    const {data,error}=await db.rpc('start_new_round',{p_pin:pin});busy=false;el.reset.disabled=false;
+    if(error||!data){el.message.textContent='Falscher PIN oder die neue Runde konnte nicht gestartet werden.';return}
+    roundId=data;counts={bride:0,groom:0,total:0};revealed=false;el.message.textContent='Neue Abstimmung ist geöffnet – alle Handys werden automatisch freigeschaltet.';draw();
+  });
+  await load();setInterval(load,2000);
+</script></body></html>
