@@ -7,6 +7,8 @@
     .card{isolation:isolate;position:relative;overflow:hidden;width:min(1460px,96vw);min-height:min(860px,92vh);display:flex;flex-direction:column;justify-content:center;padding:clamp(38px,4.5vw,70px);border:1px solid #b6975770;border-radius:42px;background:linear-gradient(145deg,#fffdf8f7,#fff8eef5);box-shadow:0 30px 90px #3d313029,0 0 0 9px #fffaf28c;text-align:center}.card::before{content:'❦';position:absolute;top:16px;left:50%;transform:translateX(-50%);color:var(--gold);font:38px Georgia,serif}.card::after{content:'';position:absolute;inset:15px;z-index:-1;border:1px solid #b6975745;border-radius:30px}.eyebrow{margin:14px 0 10px;color:var(--sage);font-size:.75rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase}h1{margin:0;font:italic 400 clamp(3.2rem,6vw,6.6rem)/.9 Georgia,serif;letter-spacing:-.045em;text-shadow:0 2px 0 #fff}h1 em{color:var(--rose);font-weight:400}.total{display:flex;justify-content:center;align-items:baseline;gap:13px;margin:14px 0 22px;color:#887873}.total strong{color:var(--ink);font:clamp(1.8rem,3vw,3.2rem) Georgia,serif}.total span{font-size:clamp(.8rem,1.2vw,1.15rem)}
     .curtain{min-height:clamp(170px,20vw,250px);display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #b6975760;border-radius:30px;background:linear-gradient(135deg,#fff9f1dc,#f8efe4e8);box-shadow:inset 0 0 0 5px #fffaf2,0 12px 30px #49382d12}.curtain>span{color:var(--gold);font-size:clamp(1.9rem,3vw,3.2rem)}.curtain p{margin:10px 0 24px;color:#7d706b;font:italic clamp(1.1rem,2vw,1.9rem) Georgia,serif}.primary,.secondary{padding:16px 32px;border-radius:999px;cursor:pointer;font-weight:700;letter-spacing:.05em;transition:.2s}.primary{border:1px solid #e8d29e;background:linear-gradient(135deg,#cf858e,#a94e5b);box-shadow:0 12px 28px #a94e5b40,inset 0 0 0 3px #ffffff18;color:#fff;font-size:clamp(.9rem,1.4vw,1.2rem)}.secondary{align-self:center;margin-top:22px;border:1px solid #b6975770;background:#fffaf2aa;color:var(--ink)}button:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 32px #49382d24}button:disabled{cursor:wait;opacity:.55}
     .result{animation:reveal .8s both}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,70px);align-items:end}.contestant{min-width:0}.photo-zone{height:clamp(210px,24vw,320px);display:grid;place-items:end center;overflow:visible}.photo-stack{position:relative;width:min(100%,520px);height:100%;transform:scale(var(--scale));transform-origin:bottom center;transition:transform 1s cubic-bezier(.2,.8,.2,1)}.photo-stack img{position:absolute;width:clamp(145px,16vw,245px);height:clamp(110px,12vw,185px);object-fit:cover;border:clamp(5px,.6vw,9px) solid #fffaf2;border-bottom-width:clamp(18px,2vw,31px);border-radius:8px;box-shadow:0 15px 32px #30232147}.photo-stack img:nth-child(1){left:2%;bottom:10%;transform:rotate(-9deg);z-index:1}.photo-stack img:nth-child(2){left:50%;bottom:18%;transform:translateX(-50%) rotate(2deg);z-index:3}.photo-stack img:nth-child(3){right:2%;bottom:7%;transform:rotate(9deg);z-index:2}.scoreline{display:grid;grid-template-columns:1fr auto;align-items:end;padding:4px clamp(8px,2vw,26px) 14px;text-align:left;border-bottom:1px solid #b6975745}.scoreline span{font:italic clamp(1.35rem,2.4vw,2.7rem) Georgia,serif}.scoreline span small{display:block;margin-top:3px;color:#8e7f79;font:700 clamp(.56rem,.8vw,.75rem) Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase}.scoreline strong{color:var(--rose);font:clamp(2.3rem,4.5vw,5rem) Georgia,serif}.groom-result .scoreline{grid-template-columns:auto 1fr;text-align:right}.groom-result .scoreline span{grid-column:2}.groom-result .scoreline strong{grid-column:1;grid-row:1;color:var(--sage)}.bar{display:flex;height:clamp(42px,5vw,70px);margin-top:20px;overflow:hidden;border:4px solid #fffaf2;border-radius:999px;background:#e8ded4;box-shadow:0 0 0 1px #b6975760,inset 0 3px 8px #3d313024}.bar div{height:100%;transition:width .8s}.bar-bride{background:linear-gradient(90deg,#b55b67,#d39499)}.bar-groom{background:linear-gradient(90deg,#7e9679,#526b52)}.live{margin:20px 0 0;color:#7b8b76;font-size:clamp(.75rem,1.2vw,1rem)}.live::before{content:'';display:inline-block;width:9px;height:9px;margin-right:8px;border-radius:50%;background:#6c9966;box-shadow:0 0 0 5px #6c99661f}.message{margin:10px 0 0;color:var(--sage);font:clamp(.78rem,1.1vw,.95rem) Georgia,serif}.error{color:#a33e4a}@keyframes reveal{from{opacity:0;transform:scale(.96) translateY(18px)}to{opacity:1;transform:none}}@media(max-width:760px){main{padding:16px}.card{min-height:94vh;padding:45px 20px 32px;border-radius:26px}.result-grid{gap:8px}.photo-zone{height:190px}.photo-stack img{width:clamp(105px,29vw,180px);height:clamp(85px,22vw,130px)}.photo-stack img:nth-child(1){left:0}.photo-stack img:nth-child(3){right:0}.scoreline{display:flex;flex-direction:column;align-items:center!important;text-align:center!important;padding:6px}.groom-result .scoreline span,.groom-result .scoreline strong{grid-column:auto;grid-row:auto}.bar{margin-top:14px}}
+    .both-note{display:inline-flex;align-items:center;gap:9px;margin:14px auto 0;padding:8px 16px;border:1px solid #b6975760;border-radius:999px;background:#fffaf2c9;color:#786642;font:700 clamp(.68rem,1vw,.9rem) Arial,sans-serif;letter-spacing:.06em}.both-note::before{content:'♥';color:var(--gold)}
+    .tie-kicker{margin:0 0 4px;color:var(--gold);font:italic clamp(1rem,1.6vw,1.45rem) Georgia,serif}.tie-photo-zone{height:clamp(235px,25vw,335px);display:grid;place-items:end center}.tie-stack{position:relative;width:min(100%,940px);height:100%}.tie-stack img{position:absolute;width:clamp(220px,26vw,360px);height:clamp(145px,17vw,235px);object-fit:cover;border:clamp(6px,.7vw,10px) solid #fffaf2;border-bottom-width:clamp(20px,2.2vw,34px);border-radius:8px;box-shadow:0 17px 38px #3023214f}.tie-stack img:nth-child(1){left:1%;bottom:8%;transform:rotate(-7deg);z-index:1}.tie-stack img:nth-child(2){left:50%;bottom:15%;transform:translateX(-50%) rotate(1deg);z-index:3}.tie-stack img:nth-child(3){right:1%;bottom:7%;transform:rotate(7deg);z-index:2}.tie-scores{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(12px,3vw,34px);width:min(850px,100%);margin:0 auto 8px}.tie-score{display:flex;align-items:baseline;justify-content:center;gap:12px}.tie-score span{font:italic clamp(1.3rem,2.4vw,2.5rem) Georgia,serif}.tie-score strong{color:var(--rose);font:clamp(2.2rem,4vw,4.7rem) Georgia,serif}.tie-score:last-child strong{color:var(--sage)}.tie-heart{color:var(--gold);font-size:clamp(1.2rem,2vw,2rem)}@media(max-width:760px){.tie-kicker{margin-top:5px}.tie-photo-zone{height:175px}.tie-stack img{width:clamp(125px,37vw,170px);height:clamp(88px,25vw,118px)}.tie-stack img:nth-child(1){left:0}.tie-stack img:nth-child(3){right:0}.tie-scores{gap:6px}.tie-score{flex-direction:column;gap:0}.tie-score span{font-size:1.15rem}.tie-score strong{font-size:2rem}}
   </style>
 </head>
 <body><main><section class="card">
@@ -20,15 +22,22 @@
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
   const db=createClient('https://rnfyfyuowipepphyixax.supabase.co','sb_publishable_I5SDfndlpWO3mNyh3o-4Rw_s2jLL55b');
   const el={title:document.querySelector('#title'),total:document.querySelector('#total'),label:document.querySelector('#total-label'),stage:document.querySelector('#stage'),reveal:document.querySelector('#reveal'),reset:document.querySelector('#reset'),live:document.querySelector('#live'),message:document.querySelector('#message')};
-  let roundId=null,counts={bride:0,groom:0,total:0},revealed=false,busy=false;
-  const percentage=()=>{if(!counts.total)return{bride:50,groom:50};const bride=Math.round(counts.bride/counts.total*100);return{bride,groom:100-bride}};
+  let roundId=null,counts={bride:0,groom:0,both:0,total:0},revealed=false,busy=false;
+  const percentage=()=>{if(!counts.total)return{bride:50,groom:50};const bride=Math.round((counts.bride+counts.both/2)/counts.total*1000)/10;return{bride,groom:Math.round((100-bride)*10)/10}};
   function draw(){
     el.total.textContent=counts.total;el.label.textContent=counts.total===1?'abgegebene Stimme':'abgegebene Stimmen';
     if(!revealed){el.title.innerHTML='Abstimmung <em>läuft</em>';el.stage.className='curtain';el.stage.innerHTML='<span>✦</span><p>Das Ergebnis ist noch geheim</p><button id="reveal" class="primary">Ergebnis enthüllen</button>';el.stage.querySelector('#reveal').addEventListener('click',()=>{revealed=true;el.message.textContent='';draw()});el.reset.hidden=true;return}
     const pct=percentage();
     const brideScale=(.58+pct.bride*.007).toFixed(2),groomScale=(.58+pct.groom*.007).toFixed(2);
+    const closeResult=counts.total>0&&pct.bride>=45&&pct.bride<=55;
     el.title.innerHTML='Das <em>Ergebnis</em>';el.stage.className='result';
-    el.stage.innerHTML=`<div class="result-grid">
+    const pictureArea=closeResult?`<section class="tie-view">
+      <p class="tie-kicker">Gemeinsam fast unschlagbar</p>
+      <div class="tie-photo-zone"><div class="tie-stack" aria-label="Gemeinsame Fotocollage von Sarah und Elias">
+        <img src="gemeinsam-1.webp" alt="Sarah und Elias"><img src="gemeinsam-2.webp" alt="Sarah und Elias"><img src="gemeinsam-3.webp" alt="Sarah und Elias">
+      </div></div>
+      <div class="tie-scores"><div class="tie-score"><span>Sarah</span><strong>${pct.bride} %</strong></div><span class="tie-heart">♥</span><div class="tie-score"><span>Elias</span><strong>${pct.groom} %</strong></div></div>
+    </section>`:`<div class="result-grid">
       <section class="contestant bride-result">
         <div class="photo-zone"><div class="photo-stack" style="--scale:${brideScale}" aria-label="Fotocollage von Sarah">
           <img src="sarah-1.webp" alt="Sarah"><img src="sarah-2.webp" alt="Sarah"><img src="sarah-3.webp" alt="Sarah">
@@ -41,19 +50,21 @@
         </div></div>
         <div class="scoreline"><span>Elias<small>Bräutigam · ${counts.groom} Stimmen</small></span><strong>${pct.groom} %</strong></div>
       </section>
-    </div><div class="bar" role="img" aria-label="Braut ${pct.bride} Prozent, Bräutigam ${pct.groom} Prozent"><div class="bar-bride" style="width:${pct.bride}%"></div><div class="bar-groom" style="width:${pct.groom}%"></div></div>`;el.reset.hidden=false;
+    </div>`;
+    el.stage.innerHTML=`${pictureArea}<div class="bar" role="img" aria-label="Braut ${pct.bride} Prozent, Bräutigam ${pct.groom} Prozent"><div class="bar-bride" style="width:${pct.bride}%"></div><div class="bar-groom" style="width:${pct.groom}%"></div></div><div class="both-note">Beide gewählt: ${counts.both} ${counts.both===1?'Stimme':'Stimmen'} · je zur Hälfte gewertet</div>`;el.reset.hidden=false;
   }
   async function load(){
     const {data:state,error:stateError}=await db.from('game_state').select('round_id').eq('id',1).single();
     if(stateError||!state){el.live.textContent='Keine Verbindung zur Abstimmung';el.live.classList.add('error');return}
     if(roundId&&state.round_id!==roundId){revealed=false;el.message.textContent='Neue Abstimmung ist geöffnet.'}
     roundId=state.round_id;
-    const [bride,groom]=await Promise.all([
+    const [bride,groom,both]=await Promise.all([
       db.from('votes').select('*',{count:'exact',head:true}).eq('round_id',roundId).eq('choice','bride'),
-      db.from('votes').select('*',{count:'exact',head:true}).eq('round_id',roundId).eq('choice','groom')
+      db.from('votes').select('*',{count:'exact',head:true}).eq('round_id',roundId).eq('choice','groom'),
+      db.from('votes').select('*',{count:'exact',head:true}).eq('round_id',roundId).eq('choice','both')
     ]);
-    if(bride.error||groom.error){el.live.textContent='Stimmen konnten nicht geladen werden';el.live.classList.add('error');return}
-    counts={bride:bride.count||0,groom:groom.count||0,total:(bride.count||0)+(groom.count||0)};el.live.textContent='Live – neue Stimmen erscheinen automatisch';el.live.classList.remove('error');draw();
+    if(bride.error||groom.error||both.error){el.live.textContent='Stimmen konnten nicht geladen werden';el.live.classList.add('error');return}
+    counts={bride:bride.count||0,groom:groom.count||0,both:both.count||0,total:(bride.count||0)+(groom.count||0)+(both.count||0)};el.live.textContent='Live – neue Stimmen erscheinen automatisch';el.live.classList.remove('error');draw();
   }
   el.reset.addEventListener('click',async()=>{
     if(busy)return;
@@ -61,7 +72,7 @@
     busy=true;el.reset.disabled=true;el.message.textContent='Neue Abstimmung wird gestartet …';
     const {data,error}=await db.rpc('start_new_round');busy=false;el.reset.disabled=false;
     if(error||!data){el.message.textContent='Die neue Runde konnte nicht gestartet werden.';return}
-    roundId=data;counts={bride:0,groom:0,total:0};revealed=false;el.message.textContent='Neue Abstimmung ist geöffnet – alle Handys werden automatisch freigeschaltet.';draw();
+    roundId=data;counts={bride:0,groom:0,both:0,total:0};revealed=false;el.message.textContent='Neue Abstimmung ist geöffnet – alle Handys werden automatisch freigeschaltet.';draw();
   });
   await load();setInterval(load,2000);
 </script></body></html>
